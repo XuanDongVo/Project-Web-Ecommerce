@@ -1,0 +1,187 @@
+.new-collections {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	margin-bottom: 100px;
+}
+
+.new-collections h1 {
+	color: #000000;
+	font-size: 50px;
+	font-weight: 600;
+}
+
+.new-collections hr {
+	width: 200px;
+	height: 6px;
+	border-radius: 10px;
+	background: #000000;
+}
+
+.collections {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr); /* 4 columns */
+	gap: 20px; /* Space between products */
+}
+
+.collection-item {
+	text-align: left;
+}
+
+.image-container {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.image-main, .image-hover {
+	width: 100%;
+	transition: opacity 0.3s ease-in-out;
+}
+
+.image-hover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+}
+
+/* Hover effects to switch images */
+.image-container:hover .image-main {
+	opacity: 0;
+}
+
+.image-container:hover .image-hover {
+	opacity: 1;
+}
+
+/* Plus icon styling */
+.collection-item .plus {
+	position: absolute;
+	bottom: 10px; /* Positioned 10px from the bottom */
+	left: 50%; /* Center horizontally */
+	transform: translateX(-50%); /* Correct the horizontal centering */
+	height: 25px;
+	width: 25px; /* Make the plus icon square */
+	z-index: 10; /* Ensure it's above the images */
+	border-radius: 50%;
+	background-color: white; /* Optional: Add a background color */
+	display: block; /* Always visible */
+	transition: opacity 0.3s ease-in-out;
+}
+
+.collection-item .plus:hover {
+	border-color: #999999;
+	scale: 1.1;
+}
+
+.collection-item .plus:active {
+	background-color: #999999;
+}
+
+.collection-item {
+	position: relative; /* ThĂªm dĂ²ng nĂ y */
+	text-align: left;
+	border: 1px solid #999999;
+}
+/* Size Popup */
+.size-container {
+	position: absolute;
+	bottom: 25%; /* 50px tá»« dÆ°á»›i, trĂªn biá»ƒu tÆ°á»£ng plus */
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	background-color: white;
+	border: 1px solid #ccc;
+	/* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
+	z-index: 100;
+	display: none; /* áº¨n máº·c Ä‘á»‹nh */
+}
+
+.size-container.active {
+	display: block; /* Hiá»ƒn thá»‹ khi active */
+}
+
+.size-options {
+	display: flex;
+	justify-content: space-around;
+	padding: 10px;
+}
+
+.size-btn {
+	padding: 5px 10px;
+	border: 1px solid #000;
+	cursor: pointer;
+	background-color: white;
+	font-size: 14px;
+	width: 100%;
+}
+
+.size-btn:hover {
+	background-color: #f0f0f0;
+}
+
+.size-btn.size-unavailable:hover {
+	cursor: not-allowed;
+}
+
+.size-btn.selected {
+	background-color: #171717;
+	color: white;
+}
+
+.close-btn {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.image-cate {
+	display: flex; /* Sá»­ dá»¥ng flexbox */
+	gap: 10px; /* Ä�iá»�u chá»‰nh khoáº£ng cĂ¡ch giá»¯a cĂ¡c hĂ¬nh áº£nh */
+	height: 45px;
+	margin-top: 5%;
+	margin-left: 5%;
+}
+
+.image-cate img {
+	flex: 0 0 auto; /* Ä�áº£m báº£o hĂ¬nh áº£nh khĂ´ng co giĂ£n */
+	cursor: pointer;
+	transition: opacity 0.3s ease-in-out;
+	border: 1px solid #999999;
+}
+
+.image-cate img:hover {
+	scale: 1.1;
+}
+
+.selected {
+	border: 1px solid #999999;
+	/* Thay Ä‘á»•i mĂ u vĂ  Ä‘á»™ dĂ y cá»§a border náº¿u cáº§n */
+}
+
+.collection-item .item-price-new {
+	margin-left: 5%;
+	margin-top: 3%;
+}
+
+.collection-item .product-name {
+	margin-left: 5%;
+	margin-top: 0;
+	font-size: 1.2rem;
+}
+
+.collection-item .product-name strong a {
+	color: black;
+	text-decoration: none
+}
+
+.collection-item .product-name strong a:hover {
+	text-decoration: underline;
+}
+

@@ -1,0 +1,80 @@
+.search-bar {
+    margin: 0.5px;
+    border: none;
+    border-bottom: 2px solid white;
+    outline: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    background: transparent;
+    outline: none;
+    border: none;
+    color: white;
+}
+
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.user-icon {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.user-options {
+    display: none;
+    flex-direction: column;
+    right: -65px;
+    margin-top: 1rem;
+    color: black;
+    position: absolute;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 9px 10px 9px 12px;
+    border: 1px solid #000;
+    background: #fff;
+    box-shadow: 0px 6px 4px rgba(179, 179, 179, .25);
+    width: 160px;
+}
+
+.user-menu:hover .user-options {
+    display: flex;
+}
+
+.user-options button {
+    color: white;
+    border-radius: 1px;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 0.5rem;
+    font-size: 15px;
+    background-color: black;
+    cursor: pointer;
+}
+
+.user-options button:last-child {
+    background-color: white;
+    color: black;
+}
+
+.heart {
+    margin-left: 1rem;
+}
+
+.heart-icon {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+input::placeholder {
+    color: white; /* Thay đổi màu của placeholder */
+}
+.input::placeholder {
+    color: grey; /* Thay đổi màu của placeholder */
+}
