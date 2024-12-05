@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap');
+.hero {
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    /* background-image: url('../img/logo_brand1.jpg'); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hero-content p{
+    color: whitesmoke;
+    font-size: 1.2rem;
+    font-family: 'Kelly Slab', sans-serif;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom:1rem;
+    cursor: pointer;
+    width: 20%;
+}
+.hero-content p:hover
+{
+    font-size: 1.5rem;
+    color: aqua;
+    outline: 1px white;
+}
+.hero-content {
+    display: flex;
+    flex: 1;
+}
+
+.hero-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    position: relative;
+    margin-left: 2rem;
+}
+.hero-hand-icon {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.hero-latest-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 210px;
+    height: 30px;
+    border-radius: 75px;
+    color: black;
+    font-size: 22px;
+    font-weight: 500;
+    text-decoration: underline;
+    /* margin-left:55rem; */
+    position: absolute;
+    margin-top: 30rem;
+}
+.hero-latest-btn:hover
+{
+    font-style: italic;
+    border: 2px solid white ;
+    background-color: transparent;
+
+}
+.hero-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    color:white;
+    position: relative;
+}
+.header-right {
+    margin-bottom: 20rem;
+    font-family: 'Kelly Slab', sans-serif;
+    text-shadow: 3px 3px 0 black;
+    position: absolute;
+}
+.header-right h1{
+    font-size: 6rem;
+}
+.header-right h2{
+    font-size: xxx-large;
+}
+.hero-right-content ul
+{
+    font-size: 1rem;
+    text-shadow: 3px 3px 0 black;
+}
+
+
+@media (max-width: 768px) {
+    .hero-right img {
+        max-height: 60vh;
+    }
+
+    .hero-left-image img {
+        max-height: 60vh;
+        margin-right: 10rem;
+    }
+}
+
+.offcanvas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+}
+
+.offcanvas-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-item-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    margin-left: 15px;
+}
+
+.cart-item-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cart-item-description {
+    font-size: 14px;
+    color: gray;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.cart-item-quantity {
+    margin-right: 10px;
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-item-price {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.offcanvas-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #000;
+}
+
+.view-cart-btn {
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.view-cart-btn:hover {
+    background-color: #333;
+}
+
+.subcategories {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 300px;
+    padding: 20px;
+    z-index: 1;
+}
+
+/* Ensure subcategories are shown on hover for both the parent (li) and subcategories */
+.nav-item:hover .subcategories,
+.subcategories:hover {
+    display: block;
+}
+
+/* Add some space between the items and the subcategories */
+.nav-item {
+    position: relative;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 15px;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.nav-menu li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+}
+
+
+/* search-bar */
+.search-bar input:focus {
+    border-bottom: 2px solid aqua;
+    transition: border-bottom 0.3s ease;
+}
+
+
+.user-options {
+    display: none;
+    /* Giá»¯ láº¡i Ä‘á»ƒ áº©n */
+    opacity: 0;
+    position: absolute;
+    right: inherit;
+    top: 3rem;
+    color: black;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 9px 10px;
+    border: 1px solid #000;
+    background: #fff;
+    box-shadow: 0px 6px 4px rgba(179, 179, 179, 0.25);
+    width: 160px;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    pointer-events: auto;
+    /* Ä�áº£m báº£o cĂ³ thá»ƒ tÆ°Æ¡ng tĂ¡c */
+}
+
+.user-menu:hover .user-options {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-icon {
+    cursor: pointer;
+}
+
+
