@@ -185,3 +185,33 @@
 	text-decoration: underline;
 }
 
+.pagination a {
+    color: black;
+    /* Màu cho các nút */
+    padding: 8px 16px;
+    /* Khoảng cách trong các nút */
+    text-decoration: none;
+    /* Bỏ gạch chân */
+    margin: 0 5px;
+    /* Khoảng cách giữa các nút */
+    border: 1px solid black;
+    /* Đường viền */
+    border-radius: 5px;
+    /* Bo tròn các góc */
+    transition: background-color 0.3s;
+    /* Hiệu ứng chuyển màu */
+}
+
+.pagination a:hover {
+    background-color: #999999;
+    /* Màu nền khi hover */
+    color: white;
+    /* Màu chữ khi hover */
+}
+
+.pagination a.active {
+    background-color: #999999;
+    /* Màu nền cho trang hiện tại */
+    color: white;
+    /* Màu chữ cho trang hiện tại */
+}
