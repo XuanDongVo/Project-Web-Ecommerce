@@ -92,7 +92,7 @@
                             <img src="https://via.placeholder.com/80x80" alt="Product Image" class="img-fluid" />
                         </div>
                         <div class="cart-item-details ml-3">
-                            <p class="cart-item-name mb-0">Áo thun nam ngắn tay sọc ngang. Loose</p>
+                            <p class="cart-item-name mb-0">Áo thun nam ngắn tay sọc ngang</p>
                             <p class="cart-item-description text-muted mb-2">TOFU, M</p>
                             <div class="cart-item-actions">
                                 <button class="btn-quantity" onclick="changeQuantity(-1, 'quantity2')">-</button>
