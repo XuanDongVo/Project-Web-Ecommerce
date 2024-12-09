@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+.cart-header {
+	font-size: 1rem;
+	padding-bottom: 10px;
+}
+
+.cart-item {
+	display: flex;
+	align-items: center;
+}
+
+.left-cart {
+	border: 1px solid #dfdfdf;
+}
+
+.font-weight-bold {
+    font-weight: bold !important;
+}
+
+/* .select-item {
+	box-sizing: border-box;
+	display: block;
+	width: 25px;
+	height: 25px;
+	direction: ltr;
+	background-color: black;
+	border: 1px solid #000;
+	border-radius: 0;
+	border-collapse: separate;
+	transition: all 0.3s;
+}
+ */
+/* Ẩn checkbox mặc định */
+.select-item, .select-item-all {
+	display: none;
+}
+
+/* Tạo hộp kiểm tùy chỉnh */
+.select-item-wrapper {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	margin-right: 1rem;
+}
+
+.custom-checkbox {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background-color: white; /* Màu nền khi không chọn */
+	border: 1px solid #000;
+	border-radius: 3px;
+	transition: background-color 0.3s;
+}
+
+/* Màu đen khi checkbox được chọn */
+.select-item:checked+.custom-checkbox, .select-item-all:checked+.custom-checkbox
+	{
+	background-color: black;
+}
+
+/* Dấu checkmark tùy chọn (nếu cần) */
+.custom-checkbox::after {
+	content: "";
+	position: absolute;
+	top: 6px;
+	left: 8px;
+	width: 6px;
+	height: 12px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+	display: none;
+}
+
+/* Hiển thị dấu checkmark khi checkbox được chọn */
+.select-item:checked+.custom-checkbox::after, .select-item-all:checked+.custom-checkbox::after
+	{
+	display: block;
+}
+
+#selectAll {
+	height: 20px;
+}
+
+.cart-item-image img {
+	width: 80px;
+	height: 80px;
+}
+
+.cart-item-details {
+	flex-grow: 1;
+	margin-left: 20px;
+}
+
+.cart-item-actions {
+	display: flex;
+	align-items: center;
+}
+
+.quantity-container {
+	display: flex;
+	align-items: center; /* Center items vertically */
+}
+
+.btn-quantity {
+	border: 1px solid #e0e0e0;
+	background-color: #fff;
+	width: 30px;
+	height: 30px;
+	font-size: 16px;
+	text-align: center;
+	cursor: pointer;
+	/*   margin-right: 5px; */
+}
+
+.item-quantity {
+	width: 40px; /* You can adjust this width */
+	height: 30px;
+	text-align: center;
+	border: 1px solid #e0e0e0; /* Match border style */
+}
+
+.total-summary {
+	border: 1px solid #dfdfdf;
+	padding: 20px;
+	text-align: center;
+	height: 268px;
+}
+
+.total-price {
+	font-weight: bold;
+	font-size: 24px;
+}
