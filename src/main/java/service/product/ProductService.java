@@ -16,6 +16,7 @@ import entity.SubCategory;
 import repository.category.CategoryRepository;
 import repository.category.SubCategoryRepository;
 import repository.color.ColorRepository;
+import repository.inventory.InventoryRepository;
 import repository.product.ProductColorImgRepository;
 import repository.product.ProductRepository;
 import repository.product.ProductSkuRepository;
@@ -31,6 +32,7 @@ public class ProductService {
 	private ColorRepository colorRepository = new ColorRepository();
 	private ProductColorImgRepository productColorImgRepository = new ProductColorImgRepository();
 	private SizeRepository sizeRepository = new SizeRepository();
+	private InventoryRepository inventoryRepository = new InventoryRepository();
 
 	// Find Product Sku by id
 	public ProductDetailResponse getSkusById(Long productId) {
@@ -250,7 +252,5 @@ public class ProductService {
 			productResponse.getProductSkus().add(skuResponse);
 		}
 	}
-
-
 
 }
