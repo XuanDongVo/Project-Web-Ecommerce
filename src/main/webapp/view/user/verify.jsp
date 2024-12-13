@@ -17,6 +17,8 @@
 		<!-- <i class='bx bx-x close-btn'></i> -->
 		<header>Nhập mã OTP</header>
 		<p>Vui lòng kiểm tra số điện thoại +84 xx xxx xx xx để đăng nhập</p>
+		<form action="<%=request.getContextPath()%>/verifyPhoneNumber" method="POST"
+			onsubmit="return submitOtp();">
 			<div class="otp-input">
 				<input type="number" name="otp_verify" style="width: 100%;"
 					oninput="this.value = this.value.slice(0, 4)" min="0" max="9999"
@@ -31,6 +33,7 @@
 			</div>
 
 			<button type="submit" class="continue-btn">Tiếp tục</button>
+		</form>
 	</div>
 </body>
 </html>
