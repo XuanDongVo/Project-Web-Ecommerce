@@ -19,6 +19,7 @@
 					<span>Login quickly with your phone number.If you don't have
 						account yet, Ecommerce will create one for you</span>
 				</div>
+				<form action="<%=request.getContextPath()%>/sendOtp" method="POST">
 					<form onsubmit="handleSingin(event)">
 						<div class="field input-field">
 							<input type="text" placeholder="Your Phone Number +84" class="input" name = "phoneNumber"
@@ -29,12 +30,14 @@
 							<button type="submit" onclick="handleSingin(event)">Next</button>
 						</div>
 					</form>
+				</form>
 			</div>
 			<div class="line"></div>
 			
+			
 			<div class="media-options">
 				<a
-					href=""
+					href="https://accounts.google.com/o/oauth2/auth?scope=profile%20https://www.googleapis.com/auth/userinfo.email&redirect_uri=http://localhost:8080/Ecommerce_Web/login-google&response_type=code&client_id=524025208769-5qnkl0hima275idgajn63hhdo7i3hfeb.apps.googleusercontent.com&approval_prompt=force"
 					class="field google"> <i class='bx bxl-google google-icon'></i>
 					<span>Login with Google</span>
 				</a>
