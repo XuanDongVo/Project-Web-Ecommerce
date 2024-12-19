@@ -1,7 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/main/java/dbConnection/DBConnection.java=UTF-8
 encoding//src/main/java/repository/cart/CartDetailRepository.java=UTF-8
-encoding//src/main/java/repository/user/UserRepository.java=UTF-8
 encoding//src/main/java/service/cartdetail/CartDetailService.java=UTF-8
 encoding//src/main/java/service/inventory/InventoryService.java=UTF-8
+encoding//src/main/java/service/order/OrderService.java=UTF-8
 encoding//src/main/java/service/product/ProductService.java=UTF-8
 encoding/<project>=windows-1258
