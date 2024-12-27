@@ -43,12 +43,13 @@ public class SubCategoryRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		}
+		} 
 		return beadCrumbs;
 	}
 
@@ -69,7 +70,7 @@ public class SubCategoryRepository {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}  finally {
 			if (pst != null) {
 				try {
 					pst.close();
@@ -79,7 +80,8 @@ public class SubCategoryRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -115,7 +117,7 @@ public class SubCategoryRepository {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}  finally {
 			if (pst != null) {
 				try {
 					pst.close();
@@ -125,7 +127,8 @@ public class SubCategoryRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
