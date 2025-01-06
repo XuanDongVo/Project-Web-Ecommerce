@@ -3,11 +3,13 @@ package repository.user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
 import dbConnection.DBConnection;
+import dto.response.AdminUserResponse;
 import entity.User;
 
 public class UserRepository {
@@ -18,7 +20,7 @@ public class UserRepository {
 	public User getUserByPhone(String phone) {
 		connection = DBConnection.getConection();
 		try {
-			String sql = "SELECT * FROM user WHERE phone = ? ";
+			String sql = "SELECT * FROM ecommerce.user WHERE phone = ? ";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, phone);
 			ResultSet rs = pst.executeQuery();
@@ -43,7 +45,8 @@ public class UserRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -58,7 +61,7 @@ public class UserRepository {
 		try {
 			// Tắt auto-commit để thực hiện giao dịch thủ công
 			connection.setAutoCommit(false);
-			String sql = "UPDATE user SET password = ? WHERE id = ?";
+			String sql = "UPDATE ecommerce.user SET password = ? WHERE id = ?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, password);
 			pst.setLong(2, user.getId());
@@ -91,7 +94,7 @@ public class UserRepository {
 			if (connection != null) {
 				try {
 					connection.setAutoCommit(true); // Bật lại auto-commit sau giao dịch
-					connection.close();
+					DBConnection.closeConnection(connection);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -106,7 +109,7 @@ public class UserRepository {
 			// Tắt auto-commit để thực hiện giao dịch thủ công
 			connection.setAutoCommit(false);
 
-			String sql = "UPDATE user SET name = ?, address = ? WHERE id = ?";
+			String sql = "UPDATE ecommerce.user SET name = ?, address = ? WHERE id = ?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, name);
 			pst.setString(2, address);
@@ -127,8 +130,8 @@ public class UserRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.setAutoCommit(true); // Bật lại auto-commit sau giao dịch
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -143,7 +146,7 @@ public class UserRepository {
 			// Tắt auto-commit để thực hiện giao dịch thủ công
 			connection.setAutoCommit(false);
 
-			String sql = "UPDATE user SET email = ? WHERE id = ?";
+			String sql = "UPDATE ecommerce.user SET email = ? WHERE id = ?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, email);
 			pst.setLong(2, user.getId());
@@ -164,7 +167,7 @@ public class UserRepository {
 			if (connection != null) {
 				try {
 					connection.setAutoCommit(true); // Bật lại auto-commit sau giao dịch
-					connection.close();
+					DBConnection.closeConnection(connection);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -175,7 +178,7 @@ public class UserRepository {
 	// kiểm tra tài khoản người dùng tồn tại chưa
 	public User isAccountExist(String email, String phone) {
 		connection = DBConnection.getConection();
-		String sql = "SELECT * FROM user WHERE email = ? OR phone = ? ";
+		String sql = "SELECT * FROM ecommerce.user WHERE email = ? OR phone = ? ";
 		try {
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, email);
@@ -192,6 +195,22 @@ public class UserRepository {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					DBConnection.closeConnection(connection);
+					;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return null;
 	}
@@ -202,7 +221,7 @@ public class UserRepository {
 		List<String> lst = new ArrayList<>();
 
 		try {
-			String sql = "SELECT email FROM user";
+			String sql = "SELECT email FROM ecommerce.user";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 
@@ -224,7 +243,8 @@ public class UserRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -232,11 +252,6 @@ public class UserRepository {
 		}
 		return lst; // Trả về danh sách email
 	}
-
-//		public static void main(String[] args) {
-//			System.out.println(new UserRepository().getEmailUser());
-//			
-//		}
 
 	// Kiểm tra mail tồn tại hay chưa
 	public boolean checkUserByEmail(String email) {
@@ -246,7 +261,7 @@ public class UserRepository {
 	public User getUserByEmail(String email) {
 		connection = DBConnection.getConection();
 		try {
-			String sql = "SELECT * FROM user WHERE email = ? ";
+			String sql = "SELECT * FROM ecommerce.user WHERE email = ? ";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, email);
 			ResultSet rs = pst.executeQuery();
@@ -271,7 +286,8 @@ public class UserRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -285,7 +301,7 @@ public class UserRepository {
 		connection = DBConnection.getConection();
 		try {
 			// SQL query để thêm người dùng mà không cần chỉ định user_id
-			String sql = "INSERT INTO user (email, name) VALUES (?, ?)";
+			String sql = "INSERT INTO ecommerce.user (email, name) VALUES (?, ?)";
 
 			// Chuẩn bị câu lệnh SQL
 			pst = connection.prepareStatement(sql);
@@ -307,7 +323,6 @@ public class UserRepository {
 			// In thông báo lỗi nếu có lỗi
 			e.printStackTrace();
 		} finally {
-			// Đảm bảo đóng kết nối và statement
 			if (pst != null) {
 				try {
 					pst.close();
@@ -317,7 +332,8 @@ public class UserRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -335,7 +351,7 @@ public class UserRepository {
 		List<String> lst = new ArrayList<>();
 
 		try {
-			String sql = "SELECT phone FROM user";
+			String sql = "SELECT phone FROM ecommerce.user";
 			pst = connection.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 
@@ -357,7 +373,8 @@ public class UserRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -372,7 +389,7 @@ public class UserRepository {
 		connection = DBConnection.getConection();
 		try {
 			// SQL query để thêm số điện thoại user
-			String sql = "INSERT INTO user (phone) VALUES (?)";
+			String sql = "INSERT INTO ecommerce.user (phone) VALUES (?)";
 
 			// Chuẩn bị câu lệnh SQL
 			pst = connection.prepareStatement(sql);
@@ -393,7 +410,6 @@ public class UserRepository {
 			// In thông báo lỗi nếu có lỗi
 			e.printStackTrace();
 		} finally {
-			// Đảm bảo đóng kết nối và statement
 			if (pst != null) {
 				try {
 					pst.close();
@@ -403,7 +419,8 @@ public class UserRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -418,7 +435,7 @@ public class UserRepository {
 			// Tắt auto-commit để thực hiện giao dịch thủ công
 			connection.setAutoCommit(false);
 
-			String sql = "UPDATE user SET name = ?, address = ?, email = ? WHERE phone = ?";
+			String sql = "UPDATE ecommerce.user SET name = ?, address = ?, email = ? WHERE phone = ?";
 
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, name);
@@ -449,7 +466,7 @@ public class UserRepository {
 			if (connection != null) {
 				try {
 					connection.setAutoCommit(true); // Bật lại auto-commit sau giao dịch
-					connection.close();
+					DBConnection.closeConnection(connection);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -464,7 +481,7 @@ public class UserRepository {
 			// Tắt auto-commit để thực hiện giao dịch thủ công
 			connection.setAutoCommit(false);
 
-			String sql = "UPDATE user SET name = ?, address = ?, phone = ? WHERE email = ?";
+			String sql = "UPDATE ecommerce.user SET name = ?, address = ?, phone = ? WHERE email = ?";
 
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, name);
@@ -495,7 +512,7 @@ public class UserRepository {
 			if (connection != null) {
 				try {
 					connection.setAutoCommit(true); // Bật lại auto-commit sau giao dịch
-					connection.close();
+					DBConnection.closeConnection(connection);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -510,7 +527,7 @@ public class UserRepository {
 			// Tắt auto-commit để thực hiện giao dịch thủ công
 			connection.setAutoCommit(false);
 
-			String sql = "UPDATE user SET name = ?, address = ?, phone = ?, email = ? where user_id = ?";
+			String sql = "UPDATE ecommerce.user SET name = ?, address = ?, phone = ?, email = ? where id = ?";
 
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, name);
@@ -542,7 +559,7 @@ public class UserRepository {
 			if (connection != null) {
 				try {
 					connection.setAutoCommit(true); // Bật lại auto-commit sau giao dịch
-					connection.close();
+					DBConnection.closeConnection(connection);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -554,9 +571,10 @@ public class UserRepository {
 	public User getUserById(Long id) {
 		connection = DBConnection.getConection();
 		try {
-			String sql = "SELECT * FROM user WHERE user_id = ? ";
+			String sql = "SELECT * FROM ecommerce.user WHERE id = ? ";
 			pst = connection.prepareStatement(sql);
-			pst.setLong(1, id);;
+			pst.setLong(1, id);
+			;
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				User user = new User();
@@ -579,7 +597,8 @@ public class UserRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -588,7 +607,249 @@ public class UserRepository {
 		return null;
 	}
 
-	public static void main(String[] args) {
-
+	public User loginForAdmin(String phone, String password) {
+		connection = DBConnection.getConection();
+		try {
+			String sql = "SELECT * FROM ecommerce.user WHERE phone = ? and password = ? ";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, "84" + phone);
+			pst.setString(2, password);
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				User user = new User();
+				user.setId(rs.getLong(1));
+				user.setEmail(rs.getString(2));
+				user.setPhone(rs.getString(3));
+				user.setAddress(rs.getString(4));
+				user.setName(rs.getString(6));
+				return user;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					DBConnection.closeConnection(connection);
+					;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
 	}
+
+	// Lấy ra danh sach nhan vien
+	public List<AdminUserResponse> getAllEmployee() {
+		connection = DBConnection.getConection();
+		List<AdminUserResponse> lst = new ArrayList<>();
+
+		try {
+			String sql = "select u.id, u.email, u.phone, u.name, u.address, u.create_at, r.name " + " from ecommerce.user u "
+					+ " inner join ecommerce.user_role  ur on  u.id = ur.user_id "
+					+ " inner join ecommerce.role r on ur.role_id = r.id " + " where r.id = 2";
+			pst = connection.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+
+			// Sử dụng vòng lặp while để lấy tất cả phone
+			while (rs.next()) {
+				AdminUserResponse aur = new AdminUserResponse(rs.getLong(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+				lst.add(aur);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					DBConnection.closeConnection(connection);
+					;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return lst; // Trả về danh sách email
+	}
+
+	// Lấy ra danh sach khach hang
+	public List<AdminUserResponse> getAllCustomer() {
+		connection = DBConnection.getConection();
+		List<AdminUserResponse> lst = new ArrayList<>();
+
+		try {
+			String sql = "select u.id, u.email, u.phone, u.name, u.address,u.create_at, r.name " + " from ecommerce.user u "
+					+ " inner join ecommerce.user_role  ur on  u.id = ur.user_id "
+					+ " inner join ecommerce.role r on ur.role_id = r.id " + " where r.id = 3";
+			pst = connection.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+
+			// Sử dụng vòng lặp while để lấy tất cả phone
+			while (rs.next()) {
+				AdminUserResponse aur = new AdminUserResponse(rs.getLong(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+				lst.add(aur);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					DBConnection.closeConnection(connection);
+					;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return lst; // Trả về danh sách email
+	}
+
+	// thay đổi thông tin người dùng
+	public void setRoleForUser(Long userId) {
+		connection = DBConnection.getConection();
+		try {
+			// Tắt auto-commit để thực hiện giao dịch thủ công
+			connection.setAutoCommit(false);
+
+			String sql = "Insert into ecommerce.user_role (user_id, role_id) "
+					+ " values(?, 3)";
+			pst = connection.prepareStatement(sql);
+			pst.setLong(1, userId);
+			
+			pst.executeUpdate();
+
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					DBConnection.closeConnection(connection);
+					;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	
+	 public boolean deleteUser(Long userId) {
+	        String deleteRoleUser = "DELETE FROM ecommerce.user_role WHERE user_id = ?";
+	        String deleteUser = "DELETE FROM ecommerce.user WHERE id = ?";
+	        connection = DBConnection.getConection();
+	        try (PreparedStatement userRolePST = connection.prepareStatement(deleteRoleUser);
+	             PreparedStatement userPST = connection.prepareStatement(deleteUser)) {
+
+	            // Xóa các phân quyền user
+	        	userRolePST.setLong(1, userId);
+	        	userRolePST.executeUpdate();
+
+	            // Xóa đơn hàng (orders)
+	        	userPST.setLong(1, userId);
+	            int rowsAffected = userPST.executeUpdate();
+
+	            // Kiểm tra nếu xóa thành công
+	            return rowsAffected > 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
+	 
+	 public boolean addUserWithRole(Long id, String email, String phone, String address, String name, Long roleId) {
+	        Connection connection = null;
+	        PreparedStatement pstUser = null;
+	        PreparedStatement pstRole = null;
+
+	        try {
+	            connection = DBConnection.getConection();
+	            connection.setAutoCommit(false); // Bắt đầu transaction
+
+	            // Câu lệnh SQL để thêm user
+	            String sqlUser = "INSERT INTO ecommerce.user (id, email, phone, address, `name`, create_at) " +
+	                             "VALUES (?, ?, ?, ?, ?, DATE(NOW()))";
+	            pstUser = connection.prepareStatement(sqlUser);
+	            pstUser.setLong(1, id);
+	            pstUser.setString(2, email);
+	            pstUser.setString(3, phone);
+	            pstUser.setString(4, address);
+	            pstUser.setString(5, name);
+	            pstUser.executeUpdate();
+
+	            // Câu lệnh SQL để gán quyền
+	            String sqlRole = "INSERT INTO user_role (user_id, role_id) VALUES (?, ?)";
+	            pstRole = connection.prepareStatement(sqlRole);
+	            pstRole.setLong(1, id);
+	            pstRole.setLong(2, roleId);
+	            pstRole.executeUpdate();
+
+	            connection.commit(); // Commit transaction
+	            return true;
+	        } catch (SQLException e) {
+	            try {
+	                if (connection != null) {
+	                    connection.rollback(); // Rollback nếu có lỗi
+	                }
+	            } catch (SQLException rollbackEx) {
+	                rollbackEx.printStackTrace();
+	            }
+	            e.printStackTrace();
+	            return false;
+	        } finally {
+	            try {
+	                if (pstUser != null) pstUser.close();
+	                if (pstRole != null) pstRole.close();
+	                if (connection != null) DBConnection.closeConnection(connection);
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	 
+	public static void main(String[] args) {
+//		new UserRepository().loginForAdmin("111111111", "123");
+
+//		List<AdminUserResponse> lst = new UserRepository().getAllCustomer();
+//		for(AdminUserResponse aur : lst) {
+//			System.out.println(aur);
+//		}
+
+		new UserRepository().addUserByEmail("abc@gmail.com", "abc");
+	}
+	
+	
+
 }
