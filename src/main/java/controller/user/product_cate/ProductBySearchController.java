@@ -29,7 +29,7 @@ public class ProductBySearchController extends HttpServlet {
 		String colorParam = req.getParameter("color");
 
 		String currentPageParam = req.getParameter("page");
-		int currentPage = (currentPageParam == null) ? 0 : Integer.parseInt(currentPageParam);
+		int currentPage = (currentPageParam == null) ? 0 : Integer.parseInt(currentPageParam)-1;
 
 		// Chuyển đổi tham số thành danh sách nếu không rỗng
 		List<String> sizes = (sizeParam != null && !sizeParam.isEmpty()) ? Arrays.asList(sizeParam.split(",")) : null;
