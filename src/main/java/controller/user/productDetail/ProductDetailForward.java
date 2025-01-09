@@ -1,8 +1,6 @@
-package controller.user.home;
+package controller.user.productDetail;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import dto.response.ProductDetailResponse;
 import jakarta.servlet.ServletException;
@@ -10,19 +8,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.cartdetail.CartDetailService;
-import service.category.SubCategoryService;
 import service.product.ProductService;
 
-@WebServlet("/home")
-public class HomeController extends HttpServlet {
+@WebServlet("/productDetail")
+public class ProductDetailForward extends HttpServlet {
 	private ProductService productService = new ProductService();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<ProductDetailResponse> listResponses = productService.getRandomProductSku(8);
-		req.setAttribute("listResponses", listResponses);
-		req.getRequestDispatcher("view/user/home.jsp").forward(req, resp);
+		Long productId = Long.parseLong(req.getParameter("id"));
+		
+		ProductDetailResponse productResponse = productService.getSkusById(productId);
+		req.setAttribute("productResponse", productResponse);
+		req.getRequestDispatcher("view/user/product_detail.jsp").forward(req, resp);
 	}
 
 	@Override
