@@ -23,9 +23,21 @@ public class ProductSkuRepository {
 	private Connection connection = null;
 	private PreparedStatement pst = null;
 	private ResultSet rs = null;
-	
-	
-	public void removeByProductSkuId( Connection connection,Long productskuId) {
+
+	public int updatePrice(Connection connection, double price, long productColorImgId) {
+		String sql = "UPDATE product_sku SET price = ? where product_color_img_id = ?";
+		try {
+			pst = connection.prepareStatement(sql);
+			pst.setDouble(1, price);
+			pst.setLong(2, productColorImgId);
+			return pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public void removeByProductSkuId(Connection connection, Long productskuId) {
 		try {
 			String sql = "DELETE FROM product_sku WHERE id = ?";
 			pst = connection.prepareStatement(sql);
@@ -33,14 +45,16 @@ public class ProductSkuRepository {
 			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public long addProductSku(Connection connection, ProductSku productSku) throws SQLException {
-		long productSkuId = 0;
+		
+			
+		
 		String sql = "INSERT INTO product_sku (product_color_img_id, size_id, price) VALUES (?, ?, ?)";
-		try (PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
+		try {
+			pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pst.setLong(1, productSku.getProductColorImage().getId());
 			pst.setLong(2, productSku.getSize().getId());
 			pst.setDouble(3, productSku.getPrice());
@@ -50,12 +64,14 @@ public class ProductSkuRepository {
 			if (rowsAffected > 0) {
 				ResultSet rs = pst.getGeneratedKeys();
 				if (rs.next()) {
-					productSkuId = rs.getLong(1); // Lấy ID của đơn hàng vừa tạo
+					return rs.getLong(1); // Lấy ID của đơn hàng vừa tạo
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		return productSkuId;
+		return 0;
 	}
 
 	public ProductSku findById(Long id) {
@@ -125,7 +141,8 @@ public class ProductSkuRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -142,7 +159,7 @@ public class ProductSkuRepository {
 		List<ProductSku> list = new ArrayList<>();
 		try {
 			sql = "SELECT pu.id, pu.price, pci.image , pci.id, c.name as color_name,p.id as product_id ,p.name as product_name, "
-					+ "sc.name as subcategory_name, s.name as size_name, st.name as type_product "
+					+ "p.description as description , sc.name as subcategory_name, s.name as size_name, st.name as type_product "
 					+ "FROM product_sku pu " + "INNER JOIN product_color_img pci ON pu.product_color_img_id = pci.id "
 					+ "INNER JOIN product p ON pci.product_id = p.id " + "INNER JOIN color c ON c.id = pci.color_id "
 					+ "INNER JOIN sub_category sc ON sc.id = p.sub_category_id "
@@ -169,6 +186,7 @@ public class ProductSkuRepository {
 				Product product = new Product();
 				product.setId(resultSet.getLong("product_id"));
 				product.setName(resultSet.getString("product_name"));
+				product.setDescription(resultSet.getString("description"));
 				SubCategory subCategory = new SubCategory();
 				subCategory.setName(resultSet.getString("subcategory_name"));
 				product.setSubCategory(subCategory);
@@ -206,7 +224,8 @@ public class ProductSkuRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -260,7 +279,8 @@ public class ProductSkuRepository {
 			}
 			if (connection != null) {
 				try {
-					connection.close();
+					DBConnection.closeConnection(connection);
+					;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -307,7 +327,7 @@ public class ProductSkuRepository {
 				pst.close();
 			}
 			if (connection != null) {
-				connection.close();
+				DBConnection.closeConnection(connection);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
