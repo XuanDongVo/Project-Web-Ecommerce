@@ -28,16 +28,16 @@ public class UpdateOrderAction extends HttpServlet {
                 // Cập nhật trạng thái đơn hàng
                 orderRepository.updateOrderById(idConvert, status);
                 if(customerEmail != null) {
-                     if (status.equals("Đã giao")) {
+                     if (status.equals("�?ã giao")) {
                         mailService.sendEmail(
                             customerEmail,
-                            "Đơn hàng của bạn đã được giao",
-                            "Cảm ơn bạn đã mua hàng! Đơn hàng của bạn đã được giao thành công."
+                            "�?ơn hàng của bạn đã được giao",
+                            "Cảm ơn bạn đã mua hàng! �?ơn hàng của bạn đã được giao thành công."
                         );
-                    } else if (status.equals("Đã hủy")) {
+                    } else if (status.equals("�?ã hủy")) {
                         mailService.sendEmail(
                             customerEmail,
-                            "Đơn hàng của bạn đã bị hủy",
+                            "�?ơn hàng của bạn đã bị hủy",
                             "Rất tiếc, đơn hàng của bạn đã bị hủy. Xin liên hệ hỗ trợ nếu có thắc mắc."
                         );
                     }

@@ -28,7 +28,7 @@ public class DeleteOrderController extends HttpServlet {
 	            boolean isDeleted = orderRepo.deleteOrder(idConvert);
 
 	            if (isDeleted) {
-	                // Chuyển hướng về trang danh sách đơn hàng
+	                // Chuyển hướng v�? trang danh sách đơn hàng
 	                resp.sendRedirect(req.getContextPath() + "/order");
 	            } else {
 	                req.setAttribute("error", "Không thể xóa đơn hàng. Vui lòng thử lại.");
