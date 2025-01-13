@@ -16,6 +16,10 @@ public class ProductSku {
 		this.price = price;
 	}
 
+	public ProductSku(long id) {
+		this.id = id;
+		}
+
 	public Long getId() {
 		return id;
 	}
